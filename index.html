@@ -30,31 +30,30 @@
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 2px solid #0063e5;
+            border: 2px solid #ed7318;
         }
         
         .logo-container {
             margin-bottom: 20px;
         }
         
-        .disney-logo {
-            font-size: 36px;
-            font-weight: bold;
-            color: #0063e5;
-            text-shadow: 0 0 10px rgba(0, 99, 229, 0.7);
+        .logo-img {
+            max-width: 200px;
             margin-bottom: 10px;
-        }
-        
-        .plus {
-            color: white;
-            font-size: 24px;
-            vertical-align: super;
         }
         
         .title {
             font-size: 24px;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             color: #fff;
+        }
+        
+        .main-instruction {
+            font-size: 16px;
+            margin-bottom: 25px;
+            color: #ffcc00;
+            line-height: 1.4;
+            font-weight: bold;
         }
         
         .user-section {
@@ -62,6 +61,7 @@
             border-radius: 10px;
             padding: 20px;
             margin: 20px 0;
+            border: 1px solid #ed7318;
         }
         
         .user-label {
@@ -80,10 +80,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border: 1px solid #ed7318;
         }
         
         .copy-btn {
-            background: #00a8ff;
+            background: #ed7318;
             color: white;
             border: none;
             border-radius: 5px;
@@ -94,7 +95,7 @@
         }
         
         .copy-btn:hover {
-            background: #0097e6;
+            background: #ff8c42;
             transform: translateY(-2px);
         }
         
@@ -107,7 +108,7 @@
             width: 100%;
             padding: 15px;
             margin: 15px 0;
-            background: #0063e5;
+            background: #ed7318;
             color: white;
             border: none;
             border-radius: 10px;
@@ -115,13 +116,13 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 99, 229, 0.4);
+            box-shadow: 0 5px 15px rgba(237, 115, 24, 0.4);
         }
         
         .btn:hover {
-            background: #0080ff;
+            background: #ff8c42;
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 99, 229, 0.6);
+            box-shadow: 0 8px 20px rgba(237, 115, 24, 0.6);
         }
         
         .btn:active {
@@ -174,13 +175,91 @@
             opacity: 0.9;
             font-weight: normal;
         }
+        
+        /* Estilos para la ventana emergente informativa inicial */
+        .info-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .info-modal-content {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid #ed7318;
+        }
+        
+        .info-modal-header {
+            background: linear-gradient(135deg, #ed7318, #ff8c42);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .info-modal-header h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .info-modal-body {
+            padding: 25px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .info-modal-body p {
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-size: 16px;
+        }
+        
+        .info-modal-highlight {
+            color: #ed7318;
+            font-weight: bold;
+        }
+        
+        .info-modal-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ed7318, #ff8c42);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(237, 115, 24, 0.3);
+        }
+        
+        .info-modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(237, 115, 24, 0.4);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="logo-container">
-            <div class="disney-logo">disney<span class="plus">+</span></div>
+            <img src="https://portal.vendeygana.net/assets/img/logo-blanco-1.png" alt="Logo" class="logo-img">
             <h1 class="title">Bot de Códigos de Disney</h1>
+            <div class="main-instruction">
+                Copie este código y dele al botón HAGA CLICK AQUI y pegue en usuario el número copiado
+            </div>
         </div>
         
         <!-- Sección del usuario primero -->
@@ -192,7 +271,7 @@
             </div>
         </div>
         
-        <!-- Botón que redirige al enlace -->
+        <!-- Botón que redirige al enlace externo -->
         <button id="botButton" class="btn">BOT - HAGA CLICK AQUÍ</button>
         
         <div class="instructions">
@@ -211,7 +290,31 @@
         <div class="next-step">Ahora haga click en el botón HAGA CLICK AQUI</div>
     </div>
 
+    <!-- Ventana emergente informativa inicial -->
+    <div class="info-modal-overlay" id="infoModalOverlay">
+        <div class="info-modal-content">
+            <div class="info-modal-header">
+                <h2>Información Importante</h2>
+            </div>
+            <div class="info-modal-body">
+                <p>Después de ingresar al sitio, coloque el correo de la cuenta a consultar código.</p>
+                <p class="info-modal-highlight">Recuerde: El código dura 15 minutos una vez solicitado.</p>
+                <button class="info-modal-btn" id="closeInfoModal">Entendido</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Mostrar ventana emergente informativa al cargar la página
+        window.addEventListener('load', function() {
+            document.getElementById('infoModalOverlay').style.display = 'flex';
+        });
+        
+        // Cerrar ventana emergente informativa
+        document.getElementById('closeInfoModal').addEventListener('click', function() {
+            document.getElementById('infoModalOverlay').style.display = 'none';
+        });
+        
         // Función para copiar al portapapeles
         function copyToClipboard(text) {
             // Método moderno usando Clipboard API
@@ -264,7 +367,7 @@
                 });
         });
         
-        // Botón principal que redirige al enlace
+        // Botón principal que redirige al enlace externo
         document.getElementById('botButton').addEventListener('click', function() {
             window.location.href = 'https://scavengerus.online/';
         });
